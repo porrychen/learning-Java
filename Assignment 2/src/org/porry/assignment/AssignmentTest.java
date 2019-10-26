@@ -51,7 +51,8 @@ public class AssignmentTest {
 			
 			// Test Quadratic
 			Quadratic quadratic = new Quadratic();
-			double a, b, c, p, q;
+			double a, b, c;
+			Root p, q;
 			
 			System.out.println();
 			System.out.println("=== Quadratic ===");
@@ -67,14 +68,16 @@ public class AssignmentTest {
 					
 					try {
 						// calculate
-						quadratic.calculator(a, b, c);
+						quadratic.calculate(a, b, c);
 						// get roots
 						p = quadratic.getP();
 						q = quadratic.getQ();
-						System.out.print("p + q = " + (p + q) + ", pq = " + (p * q) + ", ");
-						System.out.println("-b/a = " + (-b / a) + ", and c/a = " + (c / a));
-						if (quadratic.checkAdd()) System.out.println("==> P + q = -b/a ");
-						if (quadratic.checkMultiply()) System.out.println("==> P * q = c/a ");
+						System.out.println(p.toString());
+						System.out.println(q.toString());
+//						System.out.print("p + q = " + (p + q) + ", pq = " + (p * q) + ", ");
+//						System.out.println("-b/a = " + (-b / a) + ", and c/a = " + (c / a));
+//						if (quadratic.checkAdd()) System.out.println("==> P + q = -b/a ");
+//						if (quadratic.checkMultiply()) System.out.println("==> P * q = c/a ");
 					} catch (RuntimeException e) {
 						System.out.println("\n  " + e.getMessage());
 					}
