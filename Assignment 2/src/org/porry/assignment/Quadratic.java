@@ -6,29 +6,41 @@ package org.porry.assignment;
 
 /**
  * @author porrychen
- *
+ * Quadratic Class
  */
 public class Quadratic {
-	private double a, b, c;
-	private Root p, q;
+	private Root p = null, q = null;
 	
+	// ================== Begin Nested Classes ================== //
+	/**
+	 * Complex is a nested class to handle complex root
+	 */
 	class Complex implements Root {
 		private double real; // real number
 		private double imaginary; // imaginary number
 		
+		/**
+		 * constructor
+		 * @param real
+		 * @param imaginary
+		 */
 		Complex(double real, double imaginary) {
 			this.real = real;
 			this.imaginary = imaginary;
 		}
 		
+		/**
+		 * @return String
+		 */
 		public String toString() {
-//			if (imaginary == 0) return real + "";
-//	        if (real == 0) return imaginary + "i";
-//	        if (imaginary <  0) return real + " - " + (-imaginary) + "i";
-//	        return real + " + " + imaginary + "i";
 			return (real == 0 ? "" : real) + (imaginary == 0 ? "" : (imaginary <  0 ? (" - " + (-imaginary)) : (" + " + imaginary)) + "i");
 		}
 		
+		/**
+		 * add other complex root
+		 * @param root
+		 * @return Root
+		 */
 		public Root add(Root root) {
 			Complex a = this, b = (Complex) root;
 			double re = a.real + b.real;
@@ -37,6 +49,11 @@ public class Quadratic {
 			return new Complex(re, im);
 		}
 		
+		/**
+		 * multiply other complex root
+		 * @param root
+		 * @return Root
+		 */
 		public Root multiply(Root root) {
 			Complex a = this, b = (Complex) root;
 			double re = a.real * b.real - a.imaginary * b.imaginary;
@@ -45,50 +62,81 @@ public class Quadratic {
 			return new Complex(re, im);
 		}
 		
+		/**
+		 * get real part
+		 * @return double
+		 */
 		public double getReal() {
 			return real;
 		}
 		
+		/**
+		 * get imaginary part
+		 * @return double
+		 */
 		public double getImaginary() {
 			return imaginary;
 		}
 	}
 	
+	/**
+	 * Real is a nested class to handle real root
+	 */
 	class Real implements Root {
 		private double real;
 		
+		/**
+		 * constructor
+		 * @param real
+		 */
 		Real(double real) {
 			this.real = real;
 		}
 		
+		/**
+		 * @return String
+		 */
 		public String toString() {
 			return real + "";
 		}
 		
+		/**
+		 * add other real root
+		 * @param root
+		 * @return Root
+		 */
 		public Root add(Root root) {
 			return new Real(real + ((Real) root).getReal());
 		}
 		
+		/**
+		 * multiply other real root
+		 * @param root
+		 * @return Root
+		 */
 		public Root multiply(Root root) {
 			return new Real(real * ((Real) root).getReal());
 		}
 
+		/**
+		 * get real root
+		 * @return double
+		 */
 		public double getReal() {
 			return real;
 		}		
 	}
+	// ================== End Nested Classes ================== //
 	
 	/**
-	 * 
+	 * calculate three coefficients to get roots
 	 * @param a
 	 * @param b
 	 * @param c
 	 */
 	public void calculate(double a, double b, double c) {
+		p = q = null;
 		if (a == 0) throw new RuntimeException("a is zero, so the expression is not a quadratic equation anymore.");
-		this.a = a;
-		this.b = b;
-		this.c = c;
 		
 		// Compute the discriminant of the quadratic equation.
 		double discriminant = Math.pow(b, 2) - 4 * a * c;
@@ -108,18 +156,25 @@ public class Quadratic {
 		}
 	}
 	
+	/**
+	 * sum two roots
+	 * @return Root
+	 */
 	public Root sum() {
 		if (p == null || q == null) return null;
 		
 		return p.add(q);
 	}
 	
+	/**
+	 * product two roots
+	 * @return Root
+	 */
 	public Root product() {
 		if (p == null || q == null) return null;
 		
 		return p.multiply(q);
 	}
-	
 	
 	/**
 	 * check two double numbers are equal
@@ -127,31 +182,15 @@ public class Quadratic {
 	 * @param b
 	 * @return true if a == b
 	 */
-	private boolean equals(double a, double b) {
+	public boolean equals(double a, double b) {
 		if (a == b) return true;
 		
 		return Math.abs(a - b) < 0.0000001;
 	}
 	
 	/**
-	 * check p + q is equal to -b / a
-	 * @return true if equal
-	 */
-	public boolean checkAdd() {
-		return true;//equals(p + q, -b / a);
-	}
-	
-	/**
-	 * check p*q is equal to c / a
-	 * @return true if equal
-	 */
-	public boolean checkMultiply() {
-		return true;//equals(p * q, c / a);
-	}
-	
-	/**
 	 * Get p value
-	 * @return double
+	 * @return Root
 	 */
 	public Root getP() {
 		return p;
@@ -159,7 +198,7 @@ public class Quadratic {
 	
 	/**
 	 * Get q value
-	 * @return double
+	 * @return Root
 	 */
 	public Root getQ() {
 		return q;

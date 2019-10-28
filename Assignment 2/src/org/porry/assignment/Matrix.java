@@ -79,9 +79,9 @@ public class Matrix {
 		
 		Matrix result = new Matrix(A.getM(), B.getN(), false);
 		
-		for (int i = 0; i < result.M; i++) {
-			for (int j = 0; j < result.N; j++) {
-				for (int k = 0; k < A.N; k++)
+		for (int i = 0; i < result.getM(); i++) {
+			for (int j = 0; j < result.getN(); j++) {
+				for (int k = 0; k < A.getN(); k++)
 					result.data[i][j] += A.data[i][k] * B.data[k][j];
 			}
 		}

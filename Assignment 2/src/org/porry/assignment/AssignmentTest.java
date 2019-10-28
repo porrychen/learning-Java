@@ -72,12 +72,13 @@ public class AssignmentTest {
 						// get roots
 						p = quadratic.getP();
 						q = quadratic.getQ();
-						System.out.println(p.toString());
-						System.out.println(q.toString());
-//						System.out.print("p + q = " + (p + q) + ", pq = " + (p * q) + ", ");
-//						System.out.println("-b/a = " + (-b / a) + ", and c/a = " + (c / a));
-//						if (quadratic.checkAdd()) System.out.println("==> P + q = -b/a ");
-//						if (quadratic.checkMultiply()) System.out.println("==> P * q = c/a ");
+						// display roots
+						System.out.println("\n -b/a = " + (-b / a)); 
+						System.out.println("p + q = (" + p + ") + (" + q + ") = " + quadratic.sum());
+						System.out.println("==> p + q = -b/a \n");
+						System.out.println(" c/a = " + (c / a));
+						System.out.println("  pq = (" + p + ") * (" + q + ") = " + quadratic.product());
+						System.out.println("==> pq = c/a \n");
 					} catch (RuntimeException e) {
 						System.out.println("\n  " + e.getMessage());
 					}
