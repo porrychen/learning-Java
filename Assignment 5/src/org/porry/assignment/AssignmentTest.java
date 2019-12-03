@@ -19,8 +19,9 @@ public class AssignmentTest {
 	 * @param millis: Milliseconds
 	 */
 	private String convertMillis(long millis) {
-		return String.format("%d:%d:%d", millis / (1000 * 60 * 60), (millis % (1000 * 60 * 60)) / (1000 * 60),
-				((millis % (1000 * 60 * 60)) % (1000 * 60)) / 1000);
+		long seconds = millis / 1000;
+		return String.format("%d:%d:%d", seconds / (60 * 60), (seconds % (60 * 60)) / (60),
+				(seconds % (60 * 60)) % 60);
 	}
 	
 	/**
@@ -69,7 +70,7 @@ public class AssignmentTest {
 			int later = (int)(Math.random() * 600 + 1);
 			arriveTime += later * 100;
 
-			if (!queueA.isFull() && queueA.getRatio() < queueB.getRatio()) 
+			if (!queueA.isFull() && queueA.getRatio() < queueB.getRatio())
 				queueA.add(new Passenger(i + 1, arriveTime));
 			else 
 				queueB.add(new Passenger(i + 1, arriveTime));

@@ -63,7 +63,7 @@ public class Checker implements Runnable {
 				nextQueue.add(passenger);
 
 			System.out.println("Thread: id" + Thread.currentThread().getId() + " " + name + " --- Passenger "
-					+ passenger.getNumber() + "\t------- done！\t");
+					+ passenger.getNumber() + "\t--- done！\t");
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
@@ -85,10 +85,11 @@ public class Checker implements Runnable {
 	private long useStrategy() {
 		long time = generateServiceTime();
 		if (queue.isIncrease()) {
-			double min = nextQueue == null ? 0.001 : 0.01, max = (nextQueue == null ? 0.01 : 0.9);
-			time *= (long) ((Math.random() * (max + 1 - min)) + min);
+			double min = nextQueue == null ? 0.01 : 0.1, max = (nextQueue == null ? 0.09 : 0.9);
+			double randouNumb = (Math.random() * (max + 0.1 - min)) + min;
+			time *= randouNumb;
 		}
 
-		return time;
+		return (long) time;
 	}
 }

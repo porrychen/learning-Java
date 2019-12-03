@@ -4,7 +4,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class Queue {
-	private int maxsize, count = 0;
+	private int maxsize, addedCount = 0, doneCount = 0;
 	private BlockingQueue<Passenger> queue = null;
 	private Queue nextQueue = null;
 	private long previousQueueTime, finishQueueTime;
@@ -44,8 +44,8 @@ public class Queue {
 		return previousQueueTime;
 	}
 
-	public void setPreviousQueueTime(long time) {
-		this.previousQueueTime = time;
+	public void setPreviousQueueTime(long previousQueueTime) {
+		if (this.previousQueueTime < previousQueueTime) this.previousQueueTime = previousQueueTime;
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class Queue {
 	}
 
 	public void setFinishQueueTime(long finishQueueTime) {
-		this.finishQueueTime = finishQueueTime;
+		if (this.finishQueueTime < finishQueueTime) this.finishQueueTime = finishQueueTime;
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class Queue {
 	 * @return boolean
 	 */
 	public boolean isFinish() {
-		return count >= maxsize;
+		return doneCount == addedCount && addedCount != 0;
 	}
 
 	/**
@@ -113,6 +113,7 @@ public class Queue {
 		try {
 			queue.put(passenger);
 			addToIncData(getRatio());
+			addedCount++;
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -125,7 +126,7 @@ public class Queue {
 	 * @throws InterruptedException
 	 */
 	public Passenger take() throws InterruptedException {
-		count += 1;
+		doneCount += 1;
 
 		return queue.take();
 	}

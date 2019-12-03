@@ -10,21 +10,21 @@ public class FindMedian {
 	public int getMedian(Integer[] a, Integer[] b) {
 		int m = a.length, n = b.length;
 		if (m > n) {
-			// make sure that m is lease than n even though test 1 said these two arrays are the same length
+			// make sure that m is less than n even though test 1 said these two arrays are the same length 
 			return getMedian(b, a);
 		}
 		
 		int start = 0, end = m, half = (m + n + 1) / 2;
-		// find the middle position that left part is smaller than right part
+		// find the middle position that left part is smaller than the right part
 		while (start <= end) {
 			// the begin indexes of a and b in right part
 			int partitionA = (start + end) / 2;
 			int partitionB = half - partitionA;
 			
-			// 1. check the begin index of a is greater than start and 
-			// the last element of a in left part is least that the first element of b in right part
-			// 2. check the begin index of a is least than end and 
-			// the last element of b in left part is least than the first element of a in right part
+			// 1. check the begin index of a is greater than start and   
+            // the last element of a in the left part is less than the first element of b in the right part  
+            // 2. check the begin index of a is less than end and   
+            // the last element of b in left part is less than the first element of a in the right part 
 			if (partitionA > start && a[partitionA - 1] > b[partitionB]) {
 				end = partitionA - 1;
 				continue;

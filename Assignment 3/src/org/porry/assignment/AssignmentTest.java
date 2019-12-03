@@ -11,7 +11,7 @@ import test.TestPalindrome;
 
 /**
  * @author porrychen
- *
+ * AssignmentTest Class
  */
 public class AssignmentTest {
 	/**
@@ -25,9 +25,19 @@ public class AssignmentTest {
 		}
 	}
 	
+	/**
+	 * test each case
+	 * @param num
+	 * @param str
+	 * @param a
+	 * @param b
+	 * @param n
+	 * @param m
+	 * @param exp
+	 */
 	private void showCase(int num, String str, Integer[] a, Integer[] b, int n, int m, String exp) {
 		TestPalindrome testPalindrome = new TestPalindrome();
-		FindMedian findmedian = new FindMedian();
+		FindMedian findMedian = new FindMedian();
 		Checker checker = new Checker();
 		
 		System.out.println("\n-------------------- case " + num + " --------------------");
@@ -42,7 +52,7 @@ public class AssignmentTest {
 		System.out.print("b: [");
 		displayArray(b);
 		System.out.println("]");
-		System.out.println("The median is " + findmedian.getMedian(a, b) + ".\n");
+		System.out.println("The median is " + findMedian.getMedian(a, b) + ".\n");
 		
 		System.out.println("Get quotient and mod:");
 		try {
@@ -62,7 +72,7 @@ public class AssignmentTest {
 	 * run
 	 */
 	private void run() {
-		showCase(1, "", new Integer[]{-2, 5, 6, 9, 11}, new Integer[]{-5, 1, 8, 8, 19}, 10, 3, "())(");
+		showCase(1, "", new Integer[]{-2, 5, 6, 9, 11}, new Integer[]{-5, 1, 8, 8, 19}, 10, 3, "()}[)(]{");
 		
 		showCase(2, "A MOM A", new Integer[]{}, new Integer[]{-1, 0, 1, 2, 2}, -200, -3, "[()]{}{[()()]()}");
 		
